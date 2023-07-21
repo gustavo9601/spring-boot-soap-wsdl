@@ -6,7 +6,7 @@
 Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.3.0 
 Visite <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-Generado el: 2023.07.20 a las 06:50:42 PM COT 
+Generado el: 2023.07.20 a las 07:03:14 PM COT 
 
   -->
       
@@ -14,55 +14,41 @@ Generado el: 2023.07.20 a las 06:50:42 PM COT
             
         <schemaBindings map="false">
                   
-            <package name="com.soap.wsdl2"/>
+            <package name="com.soap.wsdl2.olimpia"/>
                 
         </schemaBindings>
             
-        <bindings if-exists="true" scd="tns:Add">
+        <bindings if-exists="true" scd="tns:ConfirmacionSolicitud">
                   
-            <class ref="com.soap.wsdl2.Add"/>
+            <class ref="com.soap.wsdl2.olimpia.ConfirmacionSolicitud"/>
                 
         </bindings>
             
-        <bindings if-exists="true" scd="tns:AddResponse">
+        <bindings if-exists="true" scd="tns:ConfirmacionSolicitudResponse">
                   
-            <class ref="com.soap.wsdl2.AddResponse"/>
+            <class ref="com.soap.wsdl2.olimpia.ConfirmacionSolicitudResponse"/>
+                
+        </bindings>
+          
+    </bindings>
+      
+    <bindings xmlns:tns="http://schemas.datacontract.org/2004/07/Sicov1.Core.Integracion.DTOs.runt" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="com.soap.wsdl2.olimpia"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="~tns:EntradaConfirmacionSolicitud">
+                  
+            <class ref="com.soap.wsdl2.olimpia.EntradaConfirmacionSolicitud"/>
                 
         </bindings>
             
-        <bindings if-exists="true" scd="tns:Subtract">
+        <bindings if-exists="true" scd="~tns:SalidaConfirmacionSolicitud">
                   
-            <class ref="com.soap.wsdl2.Subtract"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:SubtractResponse">
-                  
-            <class ref="com.soap.wsdl2.SubtractResponse"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Multiply">
-                  
-            <class ref="com.soap.wsdl2.Multiply"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:MultiplyResponse">
-                  
-            <class ref="com.soap.wsdl2.MultiplyResponse"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:Divide">
-                  
-            <class ref="com.soap.wsdl2.Divide"/>
-                
-        </bindings>
-            
-        <bindings if-exists="true" scd="tns:DivideResponse">
-                  
-            <class ref="com.soap.wsdl2.DivideResponse"/>
+            <class ref="com.soap.wsdl2.olimpia.SalidaConfirmacionSolicitud"/>
                 
         </bindings>
           

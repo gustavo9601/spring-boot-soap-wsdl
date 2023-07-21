@@ -73,7 +73,7 @@
 
         <configuration>
           <schemaLanguage>WSDL</schemaLanguage>
-          <generatePackage>com.soap.wsdl2</generatePackage>
+          <generatePackage>com.soap.wsdl2.olimpia</generatePackage>
           <generateDirectory>${project.basedir}/src/main/java</generateDirectory>
           <schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
           <schemaIncludes>

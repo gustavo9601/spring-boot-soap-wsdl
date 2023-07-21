@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integracion.sisec.co/2014/06/01/runt" elementFormDefault="qualified" targetNamespace="http://integracion.sisec.co/2014/06/01/runt">
+   <xs:import schemaLocation="xsd2.xml" namespace="http://schemas.datacontract.org/2004/07/SISEC.Fachadas.Runt.Entidades" />
+   <xs:element name="ConfirmacionSolicitud">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" name="Parametros" nillable="true" type="tns:EntradaConfirmacionSolicitud" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="EntradaConfirmacionSolicitud">
+      <xs:sequence>
+         <xs:element name="CodigoTramite" type="xs:int" />
+         <xs:element name="FechaSolicitud" type="xs:dateTime" />
+         <xs:element name="IdCrcRunt" type="xs:long" />
+         <xs:element name="NombreCategoria" nillable="true" type="xs:string" />
+         <xs:element name="NumeroDocumento" nillable="true" type="xs:string" />
+         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SISEC.Fachadas.Runt.Entidades" name="Restricciones" type="q1:Booleano" />
+         <xs:element name="TipoDocumento" nillable="true" type="xs:string" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="EntradaConfirmacionSolicitud" nillable="true" type="tns:EntradaConfirmacionSolicitud" />
+   <xs:element name="ConfirmacionSolicitudResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" name="ConfirmacionSolicitudResult" nillable="true" type="tns:SalidaConfirmacionSolicitud" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="SalidaConfirmacionSolicitud">
+      <xs:sequence>
+         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SISEC.Fachadas.Runt.Entidades" name="AprobacionSicov" type="q2:Booleano" />
+         <xs:element name="DetalleRechazo" nillable="true" type="xs:string" />
+         <xs:element name="FechaProcesoSicov" nillable="true" type="xs:dateTime" />
+         <xs:element name="IdProcesoSicov" nillable="true" type="xs:long" />
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="SalidaConfirmacionSolicitud" nillable="true" type="tns:SalidaConfirmacionSolicitud" />
+</xs:schema>
