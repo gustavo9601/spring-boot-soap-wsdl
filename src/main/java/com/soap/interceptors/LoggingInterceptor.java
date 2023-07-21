@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.ws.client.WebServiceClientException;
 import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 import org.springframework.ws.context.MessageContext;
@@ -24,14 +26,14 @@ public class LoggingInterceptor implements ClientInterceptor {
 
       time.set(System.currentTimeMillis());
       log.info("Tiempo de inicialización: " + time.get());
-      ValoresInterceptorRequestScope.setTiempoInicio(time.get());
+
 
 
 
       ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
       messageContext.getRequest().writeTo(outputStream);
       String request = new String(outputStream.toByteArray());
-      ValoresInterceptorRequestScope.setRequest(request);
+
 
 
       log.info("SOAP Request: " + request);
@@ -48,10 +50,14 @@ public class LoggingInterceptor implements ClientInterceptor {
       messageContext.getResponse().writeTo(outputStream);
       String response = new String(outputStream.toByteArray());
       log.info("SOAP Response: " + response);
-      ValoresInterceptorRequestScope.setResponse(response);
+
+      RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+      requestAttributes.setAttribute("response", response, RequestAttributes.SCOPE_REQUEST);
+      requestAttributes.setAttribute("tiempoEjecucion", System.currentTimeMillis() - time.get(), RequestAttributes.SCOPE_REQUEST);
+
+
 
       log.info("Tiempo de finalización: " + ((System.currentTimeMillis() - time.get()) / 1000.0));
-      ValoresInterceptorRequestScope.setTiempoEjecucion(System.currentTimeMillis() - time.get());
 
       SoapMessage responseContext = (SoapMessage) messageContext.getResponse();
       if (responseContext.getSoapBody().hasFault()) {

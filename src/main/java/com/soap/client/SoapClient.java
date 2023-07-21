@@ -5,6 +5,8 @@ import com.soap.interceptors.ValoresInterceptorRequestScope;
 import com.soap.wsdl.*;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
@@ -12,10 +14,6 @@ import org.springframework.ws.transport.context.TransportContext;
 import org.springframework.ws.transport.context.TransportContextHolder;
 
 public class SoapClient extends WebServiceGatewaySupport {
-
-
-  @Autowired
-  private ValoresInterceptorRequestScope valoresInterceptorRequestScope;
 
 
   public SoapClient() {
@@ -42,11 +40,11 @@ public class SoapClient extends WebServiceGatewaySupport {
     AddResponse addResponse = (AddResponse) getWebServiceTemplate().marshalSendAndReceive(
         "http://www.dneonline.com/calculator.asmx", addRequest, soapActionCallback);
 
-    logger.info("Valores del flujo de respuesta");
-    logger.info(valoresInterceptorRequestScope);
+    RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
+    String myValue = (String) requestAttributes.getAttribute("response", RequestAttributes.SCOPE_REQUEST);
 
-    logger.info("Tiempo de ejecucion en SoapClient:\t" +
-        ValoresInterceptorRequestScope.getTiempoEjecucion());
+    logger.info("Valor de la respuesta RESPONSE en SoapClient: " + myValue);
+
 
     return addResponse;
   }
