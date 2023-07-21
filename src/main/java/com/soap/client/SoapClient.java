@@ -1,10 +1,19 @@
 package com.soap.client;
 
+import com.soap.interceptors.LoggingInterceptor;
 import com.soap.wsdl.*;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
+import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
 public class SoapClient extends WebServiceGatewaySupport {
+
+
+    public SoapClient() {
+        logger.info("Inicializando el interceptor");
+        LoggingInterceptor loggingInterceptor = new LoggingInterceptor();
+        getWebServiceTemplate().setInterceptors(new ClientInterceptor[]{loggingInterceptor});
+    }
 
     /**
      * Metodo que se encarga de sumar dos numeros
@@ -15,23 +24,19 @@ public class SoapClient extends WebServiceGatewaySupport {
      */
     public AddResponse getAddResponse(int numberA, int numberB) {
 
+
         Add addRequest = new Add();
         addRequest.setIntA(numberA);
         addRequest.setIntB(numberB);
 
+        logger.info("Iniciando llamada al servicio web");
         SoapActionCallback soapActionCallback = new SoapActionCallback("http://tempuri.org/Add");
-
         AddResponse addResponse = (AddResponse) getWebServiceTemplate().marshalSendAndReceive("http://www.dneonline.com/calculator.asmx", addRequest, soapActionCallback);
 
         return addResponse;
     }
 
-    /**
-     * Metodo que encarga de restar dos numero
-     * @param numberA
-     * @param numberB
-     * @return SubtractResponse
-     */
+
     public SubtractResponse getSubtractResponse(int numberA, int numberB) {
 
         Subtract subtractRequest = new Subtract();
@@ -46,12 +51,6 @@ public class SoapClient extends WebServiceGatewaySupport {
     }
 
 
-    /**
-     * Metodo encargado de multiplicar dos numeros
-     * @param numberA
-     * @param numberB
-     * @return MultiplyResponse
-     */
     public MultiplyResponse getMultiplyResponse(int numberA, int numberB){
 
         Multiply multiplyRequest = new Multiply();
@@ -65,12 +64,7 @@ public class SoapClient extends WebServiceGatewaySupport {
         return multiplyResponse;
     }
 
-    /**
-     * Metodo encargado de dividir dos numeros
-     * @param numberA
-     * @param numberB
-     * @return DivideResponse
-     */
+
     public DivideResponse getDivideResponse(int numberA, int numberB){
 
         Divide divideRequest = new Divide();
